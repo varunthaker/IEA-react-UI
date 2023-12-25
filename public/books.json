@@ -1,0 +1,65 @@
+[
+  {
+    "bookId": 1,
+    "bookTitle": "A Tale of Two Cities",
+    "top15Words": [
+      "times",
+      "period",
+      "season",
+      "timeeee",
+      "darkness",
+      "hope",
+      "despair",
+      "direct",
+      "heaven",
+      "way",
+      "short",
+      "like",
+      "present",
+      "noisiest",
+      "authorities"
+    ]
+  },
+  {
+    "bookId": 2,
+    "bookTitle": "Moby Dick",
+    "top15Words": [
+      "whale",
+      "gallons",
+      "thrown",
+      "heart",
+      "stroke",
+      "immense",
+      "velocity",
+      "aorta",
+      "bore",
+      "main",
+      "pipe",
+      "water-works",
+      "london",
+      "bridge",
+      "roaring"
+    ]
+  },
+  {
+    "bookId": 3,
+    "bookTitle": "The Hound of the Baskervilles",
+    "top15Words": [
+      "holmes",
+      "mr",
+      "said",
+      "manuscript",
+      "mortimer",
+      "sir",
+      "hugo",
+      "baskerville",
+      "hall",
+      "date",
+      "s",
+      "short",
+      "long",
+      "watson",
+      "alternative"
+    ]
+  }
+]
