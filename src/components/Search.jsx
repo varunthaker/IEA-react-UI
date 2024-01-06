@@ -1,6 +1,6 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
-export function SearchBar({ listToSearch }) {
+export function SearchBar({ bookId }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryList, setSearchQueryList] = useState([]);
 
@@ -8,38 +8,47 @@ export function SearchBar({ listToSearch }) {
     setSearchQuery(e.target.value);
   }
 
-  function handleSearchSubmit() {
-    if (searchQuery?.length > 2) {
-      const topTenWordsStartWithsearchQuery = listToSearch.filter((word) =>
-        word.toLowerCase().startsWith(searchQuery.toLowerCase())
-      );
-      setSearchQueryList(topTenWordsStartWithsearchQuery);
-    } else {
-      setSearchQueryList("Please enter the String with atleast 3 Charecters");
+  async function fetchTop10WordsWithPrefix() {
+    try {
+      if (searchQuery?.length > 2) {
+        const response = await fetch(
+          `https://localhost:7166/api/Book/${bookId}/search/${searchQuery}`
+        );
+        const data = await response.json();
+        setSearchQueryList(data);
+      } else {
+        setSearchQueryList("Please enter a string with at least 3 characters");
+      }
+    } catch (error) {
+      console.error("Error Fetching data", error);
     }
   }
 
   return (
-    <Fragment>
+    <div>
       <div>
         <input
           type="text"
-          placeholder="Enter three Char"
+          placeholder="Enter three characters"
           onChange={(e) => handleSearch(e)}
         />
-        <button onClick={handleSearchSubmit}>Search</button>
+        <button onClick={fetchTop10WordsWithPrefix}>Search</button>
       </div>
 
-      {typeof searchQueryList !== "string" ? (
+      {Array.isArray(searchQueryList) ? (
         <div>
           <p>Searched Words are</p>
-          {searchQueryList.map((searchQueryElement, idx) => {
-            return <p key={idx}>{`${searchQueryElement}, `}</p>;
-          })}
+          {searchQueryList.length > 0 ? (
+            searchQueryList?.map(
+              (searchQueryElement) => `${searchQueryElement}, `
+            )
+          ) : (
+            <p>No Words Found</p>
+          )}
         </div>
       ) : (
         <p>{searchQueryList}</p>
       )}
-    </Fragment>
+    </div>
   );
 }

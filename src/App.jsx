@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { Book } from "./components/Book";
 
 function App() {
-  const [books, setBooks] = useState([]);
+  const [booksInfo, setBooksInfo] = useState([]);
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch("./books.json");
+        const response = await fetch("https://localhost:7166/api/Book");
         const data = await response.json();
-        setBooks(data);
+        setBooksInfo(data);
       } catch (error) {
         console.error("Error Fetching data", error);
       }
@@ -21,8 +21,10 @@ function App() {
   return (
     <>
       <h3>List of Books</h3>
-      {books?.map((book, idx) => {
-        return <Book key={idx} book={book} />;
+      {booksInfo?.map((bookInfo, idx) => {
+        return (
+          <Book key={idx} bookTitle={bookInfo.title} bookId={bookInfo.id} />
+        );
       })}
     </>
   );
