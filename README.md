@@ -4,9 +4,11 @@ The Task aims to create UI to develop different books list and search with few c
 
 ### Installation Guide and Usage
 
+- Clone and Run backend [here](https://github.com/varunthaker/IEA-Backend) first.
+
 - Clone this repository [here](https://github.com/varunthaker/IEA-react-UI.git).
 - RUN "npm install" to install all dependencies.
-- INSTALL npm install @mui/material @emotion/react @emotion/stylee @mui/icons-material.
+- INSTALL npm install swr.
 - RUN "npm run dev" to start the Project.
 - Connect to suggest localhost after run on cmd Terminal.
 
