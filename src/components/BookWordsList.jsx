@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
 import { SearchBar } from "./Search";
-export function BookWordsList({ bookId }) {
-  const [bookTop10WordList, setBookTop10WordList] = useState([]);
+import useSWR from "swr";
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await fetch(
-          `https://localhost:7166/api/Book/${bookId}`
-        );
-        const data = await response.json();
-        setBookTop10WordList(data);
-      } catch (error) {
-        console.error("Error Fetching data", error);
-      }
-    };
-    fetchBooks();
-  }, [bookId]);
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+export function BookWordsList({ bookId }) {
+  const {
+    data: bookTop10WordList,
+    error,
+    isLoading,
+  } = useSWR(`https://localhost:7166/api/books/${bookId}`, fetcher);
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
 
   return (
-    <div>
-      <h5>Top 10 Words are</h5>
-      {bookTop10WordList?.map((top10Words) => `${top10Words}, `)}
+    <div className="BookBody">
+      <p className="BookBodyTitleOne"> Top Ten Words </p>
+      <div className="ToptenWordsDiv">
+        <ul>
+          {bookTop10WordList?.map((top10Words, idx) => (
+            <li key={idx}>{top10Words}</li>
+          ))}
+        </ul>
+      </div>
       <SearchBar bookId={bookId} />
     </div>
   );

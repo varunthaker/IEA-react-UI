@@ -12,12 +12,12 @@ export function SearchBar({ bookId }) {
     try {
       if (searchQuery?.length > 2) {
         const response = await fetch(
-          `https://localhost:7166/api/Book/${bookId}/search/${searchQuery}`
+          `https://localhost:7166/api/books/${bookId}/search/${searchQuery}`
         );
         const data = await response.json();
         setSearchQueryList(data);
       } else {
-        setSearchQueryList("Please enter a string with at least 3 characters");
+        setSearchQueryList("Please enter at least 3 characters");
       }
     } catch (error) {
       console.error("Error Fetching data", error);
@@ -25,7 +25,8 @@ export function SearchBar({ bookId }) {
   }
 
   return (
-    <div>
+    <div className="searchBarBody">
+      <p className="BookBodyTitleOne">Search Box</p>
       <div>
         <input
           type="text"

@@ -1,0 +1,40 @@
+.title {
+  background-color: #d3d3d3;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.BookBody {
+  background-color: whitesmoke;
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.BookBodyTitleOne {
+  font-weight: bold;
+}
+
+.ToptenWordsDiv ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  column-count: 2;
+}
+
+.ToptenWordsDiv li {
+  margin-bottom: 4px;
+  line-height: 1;
+}
+
+input {
+  border: 1px solid #727272;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.searchBarBody {
+  background-color: #fdfdfd;
+  padding: 0.5rem;
+  margin-top: 5px;
+}

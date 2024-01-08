@@ -1,22 +1,18 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import useSWR from "swr";
 import { Book } from "./components/Book";
 
-function App() {
-  const [booksInfo, setBooksInfo] = useState([]);
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const response = await fetch("https://localhost:7166/api/Book");
-        const data = await response.json();
-        setBooksInfo(data);
-      } catch (error) {
-        console.error("Error Fetching data", error);
-      }
-    };
-    fetchBooks();
-  }, []);
+function App() {
+  const {
+    data: booksInfo,
+    error,
+    isLoading,
+  } = useSWR("https://localhost:7166/api/books", fetcher);
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
 
   return (
     <>
