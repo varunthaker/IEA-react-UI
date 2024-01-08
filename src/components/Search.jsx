@@ -39,16 +39,20 @@ export function SearchBar({ bookId }) {
       {Array.isArray(searchQueryList) ? (
         <div>
           <p>Searched Words are</p>
-          {searchQueryList.length > 0 ? (
-            searchQueryList?.map(
-              (searchQueryElement) => `${searchQueryElement}, `
-            )
-          ) : (
-            <p>No Words Found</p>
-          )}
+          <div className="ToptenWordsSearchDiv">
+            <ul>
+              {searchQueryList.length > 0 ? (
+                searchQueryList?.map((searchQueryElement, idx) => (
+                  <li key={idx}>{searchQueryElement}</li>
+                ))
+              ) : (
+                <p>No Words Found</p>
+              )}
+            </ul>
+          </div>
         </div>
       ) : (
-        <p>{searchQueryList}</p>
+        <p className="result">{searchQueryList}</p>
       )}
     </div>
   );
